@@ -1,3 +1,3 @@
-*{
-    background-color: lightblue;
+h2{
+    color: var(--secondaryColor);
 }

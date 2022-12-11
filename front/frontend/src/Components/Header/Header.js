@@ -1,12 +1,13 @@
 import React from 'react'
 import './Header.css'
+import '../Global.css'
 import search from './icons/search.png'
 
 export const Header = () => {
   return (
     <>
     <img src={search} />
-    <div>Header is the best thing</div>
+    <h2>Header is the best thing</h2>
     </>
   )
 }
