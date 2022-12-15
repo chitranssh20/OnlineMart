@@ -5,4 +5,19 @@
 :root{
     --primaryColor: black;
     --secondaryColor: green;
+    --thirdColor: white;
+    --fourthColor: rgb(232, 232, 232);
+}
+input{
+    border: none;
+    border-bottom: 1px solid black;
+    margin-top: 2px;
+}
+
+button{
+    background-color: var(--fourthColor);
+    border: 1px solid black;
+}
+button:hover{
+    cursor: pointer;
 }

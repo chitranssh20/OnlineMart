@@ -1,15 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
 import {Header} from './Components/Header/Header'
-import { Component } from 'react';
+import {Login} from './Components/Login/Login'
+import {SignUp} from './Components/SignUp/SignUp'
+import {Sitemap} from './Components/Sitemap/Sitemap'
 function App() {
  return (
   <>
   <BrowserRouter>
   <Routes>
-    <Route path = '/'  element = { <Header /> } />
-
+    <Route path = '/'  element = { <> <Header /> <Sitemap /> </> } />
+    <Route path = '/login'  element = { <Login /> } />
+    <Route path = '/signup'  element = { <SignUp /> } />
+    
   </Routes>
   </BrowserRouter>
   </>

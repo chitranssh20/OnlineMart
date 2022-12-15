@@ -1,0 +1,33 @@
+.sitemap{
+    height: 20%;
+    width: 100%;
+    top: 80%;
+    position: absolute;
+    background-color: var(--primaryColor);
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+}
+.sitemap ul{
+    height: 100%;
+    display: flex;
+    /* justify-content: space-around; */
+    flex-direction: column;
+}
+.sitemap ul li:nth-child(1){
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+.sitemap ul li{
+    color: var(--thirdColor);
+    list-style: none;
+    font-size: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.sitemap ul li:hover{
+    text-decoration: underline;
+}

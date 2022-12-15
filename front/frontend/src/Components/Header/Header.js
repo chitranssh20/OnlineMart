@@ -1,13 +1,33 @@
 import React from 'react'
 import './Header.css'
 import '../Global.css'
-import search from './icons/search.png'
+import '../icons/search.png'
+import search from '../icons/search.png'
 
 export const Header = () => {
+
+
+
+
   return (
     <>
-    <img src={search} />
-    <h2>Header is the best thing</h2>
+    
+        <header>
+            <span className='logo'>
+            Logo  
+            </span> 
+            <div className='search'>
+            <input className='search-bar' placeholder='search products' ></input>
+              <span className='search-icon'>
+                <img src= {search} alt= 'Search' />
+              </span>
+            </div>     
+            <span className='user-login'>
+              <p>Log In</p>
+            </span>
+
+        </header>
+    
     </>
   )
 }
