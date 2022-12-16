@@ -1,11 +1,17 @@
 import React from 'react'
 import './Header.css'
 import '../Global.css'
-import '../icons/search.png'
 import search from '../icons/search.png'
+import cart from '../icons/cart.png'
+import user from '../icons/user-white.png'
 
 export const Header = () => {
-
+  const searchGlass = document.getElementsByClassName('cart');
+  const searchQuery = () =>{
+  cart.window.addEventListener('onclick', ()=>{
+  console.log('hellow');
+})
+}
 
 
 
@@ -22,11 +28,17 @@ export const Header = () => {
                 <img src= {search} alt= 'Search' />
               </span>
             </div>     
-            <span className='user-login'>
-              <p>Log In</p>
-            </span>
+            <div className='user-login'>
+              <span className='userImg'>
 
+                <img src= {user} alt= 'user' />
+              </span>
+              <span className='userImg'>
+                <img src= {cart} alt= 'cart' />
+              </span>
+            </div>
         </header>
+
     
     </>
   )
