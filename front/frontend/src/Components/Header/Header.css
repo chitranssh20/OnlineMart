@@ -59,3 +59,37 @@ header {
 .userImg img:hover{
     cursor: pointer;
 }
+.sidebar{
+    transform: translateZ(0);
+    height: 80vh;
+    position: absolute;
+    z-index: 5;
+    top: 0px;
+    right: 0px;
+    width: 0%;
+    border: 1px solid black;
+    background-color: var(--secondaryColor);
+    overflow: hidden;
+    transition: 1s;
+}
+.sidebar h1{
+    padding-left: 10px;
+    color: var(--primaryColor);
+    margin-bottom: 2px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.sidebar h2{
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+.sidebar h3{
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 2px;
+}
+.sidebar button{
+    width: 100%;
+}

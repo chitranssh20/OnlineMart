@@ -1,4 +1,5 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import './Header.css'
 import '../Global.css'
 import search from '../icons/search.png'
@@ -6,13 +7,16 @@ import cart from '../icons/cart.png'
 import user from '../icons/user-white.png'
 
 export const Header = () => {
-  const searchGlass = document.getElementsByClassName('cart');
-  const searchQuery = () =>{
-  cart.window.addEventListener('onclick', ()=>{
-  console.log('hellow');
-})
-}
-
+  let navigate = useNavigate();
+  let sidebar = document.getElementsByClassName('sidebar')
+  const sidebarDisappear = () =>{
+    sidebar[0].style.width = '0%';
+    // sidebar[0].style.display = 'none'
+  }
+  const sidebarAppear = () =>{
+    sidebar[0].style.width = '30%';
+    // sidebar[0].style.display = 'block';
+  }
 
 
   return (
@@ -31,15 +35,25 @@ export const Header = () => {
             <div className='user-login'>
               <span className='userImg'>
 
-                <img src= {user} alt= 'user' />
+                <img src= {user} alt= 'user' onClick={()=>{
+                  sidebarAppear()
+                }} />
+              
               </span>
               <span className='userImg'>
-                <img src= {cart} alt= 'cart' />
+                <img src= {cart} alt= 'cart' target = '_blank'  onClick={()=>{
+                  navigate('cart/');
+                }} />
               </span>
             </div>
         </header>
+        <div className='sidebar' >
+          <h1 onClick={()=>{sidebarDisappear()}} >X</h1>
+          <h2>Hello, </h2>
+          <h3>Username</h3>
+          <button>Logout</button>
 
-    
+          </div>    
     </>
   )
 }

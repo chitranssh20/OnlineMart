@@ -4,8 +4,8 @@
 }
 :root{
     --primaryColor: black;
-    --secondaryColor: green;
-    --thirdColor: white;
+    --secondaryColor: rgb(219, 189, 108);
+    --thirdColor: rgb(255, 255, 255);
     --fourthColor: rgb(232, 232, 232);
 }
 input{
@@ -17,6 +17,7 @@ input{
 button{
     background-color: var(--fourthColor);
     border: 1px solid black;
+    text-align: center;
 }
 button:hover{
     cursor: pointer;
