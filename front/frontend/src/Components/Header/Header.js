@@ -1,5 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
+import { useEffect } from 'react'
 import './Header.css'
 import '../Global.css'
 import search from '../icons/search.png'
@@ -9,15 +10,36 @@ import user from '../icons/user-white.png'
 export const Header = () => {
   let navigate = useNavigate();
   let sidebar = document.getElementsByClassName('sidebar')
+  let cartSidebar = document.querySelector('#cartSidebar');
+  
+  document.onclick = (e) =>{
+    if (cartSidebar != null || cartSidebar!= undefined){
+      let sidebarStyle = window.getComputedStyle(cartSidebar, null);
+      if(e.target.className != 'sidebarClick'){
+        if(sidebarStyle.width != '0px'){
+          sidebarDisappear();
+        }
+      }
+    }
+    }
+  
   const sidebarDisappear = () =>{
     sidebar[0].style.width = '0%';
-    // sidebar[0].style.display = 'none'
   }
   const sidebarAppear = () =>{
-    sidebar[0].style.width = '30%';
-    // sidebar[0].style.display = 'block';
+    if(window.innerWidth<=600){
+      sidebar[0].style.width = '80%';
+    }
+    else{
+      sidebar[0].style.width = '30%';
+    }
+    cartSidebar = document.querySelector('#cartSidebar');
   }
-
+  const searchOnEnter = (event) =>{
+    if (event.key === 'Enter' || event.keyCode === 13){
+      console.log('Enter key pressed header.js');
+    }
+  }
 
   return (
     <>
@@ -27,9 +49,9 @@ export const Header = () => {
             Logo  
             </span> 
             <div className='search'>
-            <input className='search-bar' placeholder='search products' ></input>
+            <input className='search-bar' placeholder='search products'  onKeyDown={searchOnEnter} ></input>
               <span className='search-icon'>
-                <img src= {search} alt= 'Search' />
+                <img src= {search} alt= 'Search'   />
               </span>
             </div>     
             <div className='user-login'>
@@ -38,7 +60,6 @@ export const Header = () => {
                 <img src= {user} alt= 'user' onClick={()=>{
                   sidebarAppear()
                 }} />
-              
               </span>
               <span className='userImg'>
                 <img src= {cart} alt= 'cart' target = '_blank'  onClick={()=>{
@@ -47,11 +68,11 @@ export const Header = () => {
               </span>
             </div>
         </header>
-        <div className='sidebar' >
+        <div className='sidebar sidebarClick' id='cartSidebar' >
           <h1 onClick={()=>{sidebarDisappear()}} >X</h1>
-          <h2>Hello, </h2>
-          <h3>Username</h3>
-          <button>Logout</button>
+          <h2 className='sidebarClick' >Hello, </h2>
+          <h3 className='sidebarClick'>Username</h3>
+          <button className='sidebarClick'>Logout</button>
 
           </div>    
     </>
