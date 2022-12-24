@@ -95,3 +95,21 @@ header {
     position: relative;
     left: 25%;
 }
+.consentBox{
+    width: 100%;
+    height: 30vh;
+    background-color: var(--secondaryColor);
+    position: absolute;
+    z-index: 5;
+    top: 68vh;
+    opacity: 1;
+    display: none;
+}
+.consentBox button{
+    width: 30%;
+    margin-left: 10%;
+    color: white;
+    background-color: black;
+    margin-top: 10px;
+    cursor: pointer;
+}

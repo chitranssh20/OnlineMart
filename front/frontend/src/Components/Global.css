@@ -15,10 +15,10 @@ input{
 }
 
 button{
-    background-color: var(--fourthColor);
+    background-color: var(--primaryColor);
     border: 1px solid black;
     text-align: center;
-}
-button:hover{
+    color: var(--thirdColor);
+    letter-spacing: 1px;
     cursor: pointer;
 }

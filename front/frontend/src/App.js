@@ -1,4 +1,5 @@
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
+import { useEffect } from 'react'
 import {Header} from './Components/Header/Header'
 import {Login} from './Components/Login/Login'
 import {SignUp} from './Components/SignUp/SignUp'
@@ -6,6 +7,10 @@ import {Sitemap} from './Components/Sitemap/Sitemap'
 import {Cart} from './Components/Cart/Cart'
 import {Error} from './Components/Error/Error'
 function App() {
+
+
+
+
  return (
   <>
   <BrowserRouter>
@@ -14,7 +19,7 @@ function App() {
     <Route path = '/'  element = { <> <Header /> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
     <Route path = '/signup'  element = { <SignUp /> } />
-    <Route path = '/cart'  element = { <Cart /> } />
+    <Route path = '/cart'  element = {<> <Header /> <Cart /> <Sitemap /> </> } />
 
   </Routes>
   </BrowserRouter>

@@ -10,3 +10,25 @@ form{
     width: 60%;
     padding: 5px;
 }
+.homeButton{
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-decoration: 2px underline;
+    cursor: pointer;
+}
+.homeButton:hover{
+    text-decoration: none;
+    transition: 1s;
+}
+.formCaption{
+    color: var(--primaryColor);
+    font-size: 15px;
+}
+.formCaptionAction{
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: 2px underline;
+}

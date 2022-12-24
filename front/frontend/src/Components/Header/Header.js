@@ -40,12 +40,34 @@ export const Header = () => {
       console.log('Enter key pressed header.js');
     }
   }
+  const removeCookieConsentBox = () =>{
+    let consentBox =  document.getElementsByClassName('consentBox')[0];
+    consentBox.style.display = 'none'
 
+    
+  }
+  const cookieConsentRejected = () =>{
+    removeCookieConsentBox();
+  }
+  const cookieConsentAccepted = () =>{
+    removeCookieConsentBox();
+    localStorage.setItem('Consent', true);
+  }
+  let consent = localStorage.getItem('Consent')
+  useEffect(() => {
+    if(!consent){
+      let consentBox = document.getElementsByClassName('consentBox')[0]
+      consentBox.style.display = 'block'
+    }
+  }, [])
+    
   return (
     <>
     
         <header>
-            <span className='logo'>
+            <span className='logo' onClick={()=>{
+              navigate('/')
+            }} >
             Logo  
             </span> 
             <div className='search'>
@@ -73,8 +95,23 @@ export const Header = () => {
           <h2 className='sidebarClick' >Hello, </h2>
           <h3 className='sidebarClick'>Username</h3>
           <button className='sidebarClick'>Logout</button>
-
           </div>    
+      
+            <div className='consentBox'>
+              <h3>COOKIES CONSENT</h3>
+              <br></br>
+              <p>We want to inform you that we collect cookies for proper function of the site and better user experience.
+               </p>
+               <br>
+               </br>
+               <p>You can click here to see what cookies we collect and for which purposes.</p>
+               <p>By clicking on Agree button you will be providing consent for us to collect cookies.</p>
+                <button onClick={()=> cookieConsentRejected()}  >Reject</button>
+                <button onClick={()=> cookieConsentAccepted()} >Agree</button>
+
+            </div>
+       
+
     </>
   )
 }
