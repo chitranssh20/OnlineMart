@@ -1,5 +1,4 @@
 import {BrowserRouter,Routes, Route} from 'react-router-dom'
-import { useEffect } from 'react'
 import {Header} from './Components/Header/Header'
 import {Login} from './Components/Login/Login'
 import {SignUp} from './Components/SignUp/SignUp'

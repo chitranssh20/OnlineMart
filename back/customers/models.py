@@ -1,16 +1,21 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class VisitorManager(BaseUserManager):
-    def create_user(self, email, password, otp):
+    def create_visitor(self, email, password, otp):
         if not email:
             raise ValueError('Email must be provided')
         if not password:
             raise ValueError('Password must be provided')
+        if not otp:
+            raise ValueError('OTP must be provided')
         email = self.normalize_email(email)
         user = self.model(email = email)
         user.set_password(password)
+        user.last_login = timezone.now()
+        user.otp = otp
         user.save()
 
         return user 
@@ -31,6 +36,7 @@ class CustomerManager(BaseUserManager):
         email = self.normalize_email(email)
         customer = self.model(email = email, fname = fname, lname = lname, phone = phone)
         customer.set_password(password)
+        customer.last_login = timezone.now()
         customer.save()
 
         return customer 
@@ -58,7 +64,6 @@ class CustomerManager(BaseUserManager):
 # User who has not made any purchase
 class Visitor(AbstractBaseUser):
     email = models.EmailField(primary_key=True)
-    # password = models.CharField()
     otp = models.IntegerField()
 
     USERNAME_FIELDS = 'email'
@@ -69,10 +74,10 @@ class Customer(AbstractBaseUser):
     email = models.EmailField(primary_key=True)
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=15)
     newsletter = models.BooleanField(default=False)
     street = models.CharField(max_length=200)
-    pincode = models.ForeignKey('Address', on_delete=models.PROTECT)
+    pincode = models.ForeignKey('Address', on_delete=models.PROTECT, null=True)
     isStaff = models.BooleanField(default=False)
     isSuperuser = models.BooleanField(default = False)
 
@@ -80,7 +85,7 @@ class Customer(AbstractBaseUser):
     REQUIRED_FIELDS = ['fname', 'lname', 'phone']
 
 
-    obejcts = CustomerManager()
+    objects = CustomerManager()
 
 
 class Address(models.Model):
