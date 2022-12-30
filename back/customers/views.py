@@ -5,6 +5,8 @@ from rest_framework import status
 from django.core.mail import send_mail
 from .models import Visitor, Customer
 import random
+from multiprocessing import Process
+from .asyncfunctions import resetOTP
 
 # Create your views here.
 def index(self):
@@ -19,6 +21,17 @@ defaultOTP = otpEndRange*7
 # If otp matches then create a customer and register the user.
 # If email request comes from the client then isCustomer function will tell if it is registered and "Already Registered will be returned" and if email is not registered then if the email is already in visitor database then it will be deleted and recreated just to make the process easy
 
+
+
+# Function to generate OTP
+def generateOTP():
+    otp = int(random.randrange(otpStartRange, otpEndRange, otpStepRange))
+    return otp
+
+
+# Function to send emails
+def sendEmail(email, otp):
+    send_mail('Welcome to Online Mart', 'Welcome to Online Mart. Please Enter this otp to verify your email address.\nOTP: '+str(otp),'ecomweb2022@outlook.com', [email], fail_silently=False)
 
 def isCustomer(email):
     doesCustomerExist = Customer.objects.filter(email = email).exists()
@@ -48,13 +61,15 @@ class emailVerification(APIView):
         else:
             email = checkEmail
             password = checkPassword 
-            otp = int(random.randrange(otpStartRange, otpEndRange, otpStepRange))
+            otp = generateOTP()
             print('otp', otp)
 
             isAlreadyInVisitor(email)
 
             visitor = Visitor.objects.create_visitor(email, password, otp)
-            # send_mail('Welcome to Online Mart', 'Welcome to Online Mart. Please Enter this otp to verify your email address.\nOTP: '+str(otp),'ecomweb2022@outlook.com', [email], fail_silently=False)
+            # send_mail('Welcome to Online Mart', 'Welcome to Online Mart. Please Enter this otp to verify your email address.\nOTP: '+str(otp),'ecomweb2022@outlook.com', [email], 
+            # fail_silently=False)
+            sendEmail(email, otp)
             return Response({'message': 'Please Verify the OTP', 'status': status.HTTP_403_FORBIDDEN})
 
 class otpVerification(APIView):
@@ -79,17 +94,30 @@ class otpVerification(APIView):
             return Response({'message': 'Please Sign Up', 'status': status.HTTP_400_BAD_REQUEST})
         visitor = Visitor.objects.get(email = email)
         visitorOTP = visitor.otp
-        print(visitor.otp, otp, visitorOTP)
-        print(type(visitor.otp), type(otp), type(visitorOTP))
         if otp == visitorOTP:
-            print('matched')
             customer = Customer.objects.create_customer(email, password, fname, lname, phone)
-            # print(customer)
             return Response({'message': 'OTP Verified', 'status': status.HTTP_201_CREATED})
+        
+        # Resetting OTP
+        # task = asyncio.create_task(resetOTP(email))
+        p = Process(target=resetOTP, args=(email,defaultOTP,))
+        p.start()
+        
         return Response({'message': 'Wrong OTP', 'status': status.HTTP_401_UNAUTHORIZED})
+       
 
-
-
+class resendOTP(APIView):
+    def post(self, request):
+        email = request.POST.get('email')
+        if email is None:
+            return Response({'message': 'No Email Provided', 'status': status.HTTP_401_UNAUTHORIZED})
+        
+        otp = generateOTP()
+        visitor = Visitor.objects.get(email = email)
+        visitor.otp = otp
+        visitor.save()
+        # sendEmail(email, otp)
+        return Response({'message': 'New OTP has been sent. Please Verify', 'status': status.HTTP_401_UNAUTHORIZED })
             
         
             # return Response(5+5)
