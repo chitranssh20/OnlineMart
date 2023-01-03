@@ -8,15 +8,12 @@ class Product(models.Model):
     retail_price = models.IntegerField()
     discounted_price = models.IntegerField()
     image = ArrayField(models.CharField(max_length=1000))
-    description = models.CharField(max_length=600)
+    description = models.CharField(max_length=60000)
     rating = models.FloatField()
 
 class ProductData(models.Model):
     prodId = models.AutoField(primary_key=True)
-    product_name = models.CharField(max_length=50, unique=True)
-    brand = models.ForeignKey('Brand', on_delete=models.CASCADE)
+    product_name = models.CharField(max_length=200, unique=True)
+    brand = models.CharField(max_length=100)
 
 
-class Brand(models.Model):
-    brandId = models.AutoField(primary_key=True)
-    brand = models.CharField(max_length=50,unique=True)

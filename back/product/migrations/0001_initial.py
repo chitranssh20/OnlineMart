@@ -14,18 +14,11 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Brand',
-            fields=[
-                ('brandId', models.AutoField(primary_key=True, serialize=False)),
-                ('brand', models.CharField(max_length=50, unique=True)),
-            ],
-        ),
-        migrations.CreateModel(
             name='ProductData',
             fields=[
                 ('prodId', models.AutoField(primary_key=True, serialize=False)),
-                ('product_name', models.CharField(max_length=50, unique=True)),
-                ('brand', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.brand')),
+                ('product_name', models.CharField(max_length=200, unique=True)),
+                ('brand', models.CharField(max_length= 100)),
             ],
         ),
         migrations.CreateModel(
@@ -35,7 +28,7 @@ class Migration(migrations.Migration):
                 ('retail_price', models.IntegerField()),
                 ('discounted_price', models.IntegerField()),
                 ('image', django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=1000), size=None)),
-                ('description', models.CharField(max_length=600)),
+                ('description', models.CharField(max_length=60000)),
                 ('rating', models.FloatField()),
                 ('product_name', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='product.productdata')),
             ],
