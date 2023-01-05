@@ -8,7 +8,7 @@ class Product(models.Model):
     retail_price = models.IntegerField()
     discounted_price = models.IntegerField()
     description = models.CharField(max_length=10000)
-    rating = models.FloatField()
+    rating = models.FloatField(default=0.0)
 
 class ProductData(models.Model):
     prodId = models.AutoField(primary_key=True)
@@ -19,3 +19,4 @@ class ProductImages(models.Model):
     productImage = models.ImageField(upload_to='media')
     uniqId = models.ForeignKey('Product', on_delete=models.CASCADE)
 
+# 175060
