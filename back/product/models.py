@@ -16,7 +16,9 @@ class ProductData(models.Model):
     brand = models.CharField(max_length=100)
 
 class ProductImages(models.Model):
-    productImage = models.ImageField(upload_to='media')
+    firstImage = models.ImageField(upload_to='media')
+    secondImage = models.ImageField(upload_to='media', null=True)
+    thirdImage = models.ImageField(upload_to='media', null=True)
     uniqId = models.ForeignKey('Product', on_delete=models.CASCADE)
 
 # 175060
