@@ -1,0 +1,3 @@
+Add admin header that describes admin name, rank (staff, superuser ) also checks if admin value is true or false in storage and rediret to admin login if admin cookie is not set 
+Forgot Password API and Testing
+Including image in login and sign up form if on pc because 100% width is just too much

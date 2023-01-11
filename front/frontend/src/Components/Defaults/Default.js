@@ -1,7 +1,8 @@
-import React from 'react'
+// import React from 'react'
+// import React from 'react'
 
-export const CookieAttributes = () => {
-  return (
-    <div>CookieAttributes</div>
-  )
-}
+// export const Default = () => {
+//   return (
+//     <div>Default</div>
+//   )
+// }

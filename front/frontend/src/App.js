@@ -5,6 +5,9 @@ import {SignUp} from './Components/SignUp/SignUp'
 import {Sitemap} from './Components/Sitemap/Sitemap'
 import {Cart} from './Components/Cart/Cart'
 import {Error} from './Components/Error/Error'
+import {AdminLogIn} from './Components/AdminLogIn/AdminLogIn'
+import {AdminDashboard} from './Components/AdminDashboard/AdminDashboard'
+import {ManageStaff} from './Components/ManageStaff/ManageStaff'
 function App() {
 
 
@@ -18,6 +21,9 @@ function App() {
     <Route path = '/'  element = { <> <Header /> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
     <Route path = '/signup'  element = { <SignUp /> } />
+    <Route path = '/admin'  element = { <AdminLogIn /> } />
+    <Route path = '/admindash'  element = { <AdminDashboard /> } />
+    <Route path = '/managestaff'  element = { <ManageStaff /> } />
     <Route path = '/cart'  element = {<> <Header /> <Cart /> <Sitemap /> </> } />
 
   </Routes>
