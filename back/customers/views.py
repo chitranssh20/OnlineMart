@@ -7,6 +7,7 @@ from .models import Visitor, Customer
 import random
 from multiprocessing import Process
 from .asyncfunctions import resetOTP
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 def index(self):
@@ -69,7 +70,7 @@ class emailVerification(APIView):
             visitor = Visitor.objects.create_visitor(email, password, otp)
             # send_mail('Welcome to Online Mart', 'Welcome to Online Mart. Please Enter this otp to verify your email address.\nOTP: '+str(otp),'ecomweb2022@outlook.com', [email], 
             # fail_silently=False)
-            sendEmail(email, otp)
+            # sendEmail(email, otp)
             return Response({'message': 'Please Verify the OTP', 'status': status.HTTP_403_FORBIDDEN})
 
 class otpVerification(APIView):
@@ -121,5 +122,15 @@ class resendOTP(APIView):
             
         
             # return Response(5+5)
-        
+
+#     Black List Tokens
+class Blacklist(APIView):
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response("Succesfull")
+        except Exception as e:
+            return Response(status.HTTP_400_BAD_REQUEST)
 

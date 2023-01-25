@@ -1,7 +1,17 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import axiosInstance from '../Axios'
 
 export const ManageStaff = () => {
-  return (
-    <div>ManageStaff</div>
+  
+  
+  const tryproduct = () =>{
+      const response = axiosInstance.get('product/getAllProducts/').then(res => console.log(res.data))
+      console.log(response)
+      console.log('hehe')
+  }
+  tryproduct();
+    return (
+      <div>ManageStaff</div>
   )
 }
