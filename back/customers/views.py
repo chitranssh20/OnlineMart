@@ -8,6 +8,7 @@ import random
 from multiprocessing import Process
 from .asyncfunctions import resetOTP
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 # Create your views here.
 def index(self):
@@ -133,4 +134,13 @@ class Blacklist(APIView):
             return Response("Succesfull")
         except Exception as e:
             return Response(status.HTTP_400_BAD_REQUEST)
+
+# Check if the user is admin to decide whether to redireect for security
+class checkAdmin(APIView):
+    # permission_classes = [IsAdminUser]
+    def get(self, request):
+        data = request.headers
+        print(5+5)
+        print(data)
+        return Response({'rescode': status.HTTP_202_ACCEPTED})
 

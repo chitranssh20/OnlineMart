@@ -6,7 +6,7 @@ export const ManageStaff = () => {
   
   
   const tryproduct = () =>{
-      const response = axiosInstance.get('product/getAllProducts/').then(res => console.log(res.data))
+      const response = axiosInstance.get('product/getBrands/').then(res => console.log(res.data))
       console.log(response)
       console.log('hehe')
   }

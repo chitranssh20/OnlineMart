@@ -43,17 +43,17 @@ class CustomerManager(BaseUserManager):
     
     def create_staff(self, email, password, fname, lname, phone):
         staff = self.create_customer(email, password, fname, lname, phone)
-        staff.isStaff = True 
+        staff.is_staff = True
 
-        if staff.isStaff is not True:
+        if staff.is_staff is not True:
             raise ValueError('is_staff must be true')
         
         return staff 
     def create_superuser(self, email, password, fname, lname, phone):
         superuser = self.create_staff(email, password, fname, lname, phone)
-        superuser.isSuperuser = True 
+        superuser.is_superuser = True
 
-        if superuser.isSuperuser is not True:
+        if superuser.is_superuser is not True:
             raise ValueError('isSuperuser must be True')
 
         return superuser
@@ -78,8 +78,8 @@ class Customer(AbstractBaseUser):
     newsletter = models.BooleanField(default=False)
     street = models.CharField(max_length=200)
     pincode = models.ForeignKey('Address', on_delete=models.PROTECT, null=True)
-    isStaff = models.BooleanField(default=False)
-    isSuperuser = models.BooleanField(default = False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default = False)
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
