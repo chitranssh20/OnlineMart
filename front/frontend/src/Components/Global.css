@@ -22,3 +22,43 @@ button{
     letter-spacing: 1px;
     cursor: pointer;
 }
+button:active{
+    transform: scale(0.99);
+}
+table{
+    margin-top: 50px;
+    width: 100%;
+    padding-top: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
+    background-color: var(--fourthColor);
+}
+thead{
+    background-color: var(--secondaryColor);
+}
+thead>tr>td{
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+tr{
+    display: flex;
+    justify-content: space-evenly;
+}
+td{
+    width: 20%;
+    padding-top: 2px;
+}
+td>button{
+    color: white;
+    background-color: black;
+    width: 100%;
+    padding: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    cursor: pointer;
+}
+tbody>tr{
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}

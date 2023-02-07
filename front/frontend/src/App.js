@@ -8,6 +8,12 @@ import {Error} from './Components/Error/Error'
 import {AdminLogIn} from './Components/AdminLogIn/AdminLogIn'
 import {AdminDashboard} from './Components/AdminDashboard/AdminDashboard'
 import {ManageStaff} from './Components/ManageStaff/ManageStaff'
+import { AddStaff } from './Components/AddStaff/AddStaff'
+import { AddSuperUser } from './Components/AddSuperUser/AddSuperUser'
+import { ManageProducts } from './Components/ManageProducts/ManageProducts'
+import { ProductDash } from './Components/ProductDash/ProductDash'
+import { AddProduct } from './Components/AddProduct/AddProduct'
+import { UpdateProduct } from './Components/UpdateProduct/UpdateProduct'
 function App() {
 
 
@@ -24,6 +30,12 @@ function App() {
     <Route path = '/admin'  element = { <AdminLogIn /> } />
     <Route path = '/admindash'  element = { <AdminDashboard /> } />
     <Route path = '/managestaff'  element = { <ManageStaff /> } />
+    <Route path = '/manageproducts'  element = { <ManageProducts /> } />
+    <Route path = '/addstaff'  element = { <AddStaff /> } />
+    <Route path = '/addsuperuser'  element = { <AddSuperUser /> } />
+    <Route path = '/productdash'  element = { <ProductDash /> } />
+    <Route path = '/addProduct'  element = { <AddProduct /> } />
+    <Route path = '/updateProduct/:id'  element = { <UpdateProduct /> } />
     <Route path = '/cart'  element = {<> <Header /> <Cart /> <Sitemap /> </> } />
 
   </Routes>

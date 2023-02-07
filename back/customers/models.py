@@ -40,18 +40,22 @@ class CustomerManager(BaseUserManager):
         customer.save()
 
         return customer 
-    
+
     def create_staff(self, email, password, fname, lname, phone):
         staff = self.create_customer(email, password, fname, lname, phone)
         staff.is_staff = True
+        staff.save()
 
         if staff.is_staff is not True:
             raise ValueError('is_staff must be true')
         
         return staff 
     def create_superuser(self, email, password, fname, lname, phone):
+
+        print(email, password, fname)
         superuser = self.create_staff(email, password, fname, lname, phone)
         superuser.is_superuser = True
+        superuser.save()
 
         if superuser.is_superuser is not True:
             raise ValueError('isSuperuser must be True')

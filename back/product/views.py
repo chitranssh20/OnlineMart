@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Product, ProductData, ProductImages
 from .serializer import productSerializer, productDataSerializer, productImgSerializer
-
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 # Utility Functions 
 
@@ -19,7 +19,7 @@ class getBrands(APIView):
             brandObjects = ProductData.objects.all() 
             brands = productDataSerializer(brandObjects, many= True) 
 
-            return Response({'message': brands.data, 'status': status.HTTP_200_OK})
+            return Response({'data': brands.data, 'status': status.HTTP_200_OK})
 
 
 class getAllProducts(APIView):
@@ -92,17 +92,18 @@ class getSingleProduct(APIView):
         return Response({'message': 'Please use get method', 'status': status.HTTP_400_BAD_REQUEST})
 
 class addProduct(APIView):
+    permission_classes = [IsAdminUser]
     def post(self, request):
         if request.method == 'POST':
-            name = request.POST.get('product_name')
-            description = request.POST.get('description')
-            retail_price = request.POST.get('retail_price')
-            discounted_price = request.POST.get('discounted_price')
-            brand = request.POST.get('brand')
+            name = request.data['name']
+            description = request.data['description']
+            retail_price = request.data['retail_price']
+            discounted_price = request.data['discounted_price']
+            brand = request.data['brand']
             imgF = request.FILES['imgF']
             imgS = request.FILES['imgS']
             imgT = request.FILES['imgT']
-            if name is None or description is None or retail_price is None or discounted_price is None or brand is None :
+            if not name or not description or not retail_price or not discounted_price or not brand or not imgF or not imgT or not imgS:
                 return Response({'message': 'Missing credentials', 'status': status.HTTP_400_BAD_REQUEST})
 
             else:
@@ -220,4 +221,4 @@ class deleteBrand(APIView):
         else:
             brand = ProductData.objects.get(pk = id)
             brand.delete()
-            return Response({'message': 'Product Deleted', 'status': status.HTTP_301_MOVED_PERMANENTLY })
+            return Response({'message': 'Product has been Deleted', 'status': status.HTTP_301_MOVED_PERMANENTLY })

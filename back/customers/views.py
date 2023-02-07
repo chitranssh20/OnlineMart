@@ -9,6 +9,7 @@ from multiprocessing import Process
 from .asyncfunctions import resetOTP
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from .serializer import customerSerializer
 
 # Create your views here.
 def index(self):
@@ -137,10 +138,76 @@ class Blacklist(APIView):
 
 # Check if the user is admin to decide whether to redireect for security
 class checkAdmin(APIView):
-    # permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser]
     def get(self, request):
-        data = request.headers
-        print(5+5)
-        print(data)
         return Response({'rescode': status.HTTP_202_ACCEPTED})
+
+class getStaff(APIView):
+    permission_classes = [IsAdminUser]
+    def get(selfs, request):
+        staffData= Customer.objects.filter(is_staff = True)
+        staff = customerSerializer(staffData, many=True)
+        return Response({'staff': staff.data, 'status': status.HTTP_200_OK})
+
+class addStaff(APIView):
+    permission_classes = [IsAdminUser]
+    def post(self, request):
+        if request.method == 'POST':
+            if not request.user.is_superuser:
+                return Response({'message': ' You are not authorized to take this action', 'status': status.HTTP_401_UNAUTHORIZED})
+            email = request.data['email']
+            password = request.data['password']
+            cpassword = request.data['cpassword']
+            phone = request.data['phone']
+            fname = request.data['fname']
+            lname = request.data['lname']
+            if not email or not password or not cpassword or not phone or not fname or not lname:
+                return Response({'message ':'missing data', 'status': status.HTTP_400_BAD_REQUEST})
+            if password != cpassword:
+                return Response({'message': 'Passwords do not match', 'status': status.HTTP_400_BAD_REQUEST})
+
+            if isCustomer(email)['status'] == 302:
+                return Response({'message': 'Email Already Taken', 'status': status.HTTP_302_FOUND})
+            staff = Customer.objects.create_staff(email, password, fname, lname, phone)
+            return Response({'message': 'Staff Added', 'status': status.HTTP_201_CREATED})
+
+class addSuperuser(APIView):
+    permission_classes = [IsAdminUser]
+    def post(self, request):
+        if request.method == 'POST':
+            if not request.user.is_superuser:
+                return Response({'message': ' You are not authorized to take this action', 'status': status.HTTP_401_UNAUTHORIZED})
+            email = request.data['email']
+            password = request.data['password']
+            cpassword = request.data['cpassword']
+            phone = request.data['phone']
+            fname = request.data['fname']
+            lname = request.data['lname']
+            if not email or not password or not cpassword or not phone or not fname or not lname:
+                return Response({'message ':'missing data', 'status': status.HTTP_400_BAD_REQUEST})
+            if password != cpassword:
+                return Response({'message': 'Passwords do not match', 'status': status.HTTP_400_BAD_REQUEST})
+
+            if isCustomer(email)['status'] == 302:
+                return Response({'message': 'Email Already Taken', 'status': status.HTTP_302_FOUND})
+            staff = Customer.objects.create_superuser(email, password, fname, lname, phone)
+            return Response({'message': 'Superuser Added', 'status': status.HTTP_201_CREATED})
+
+class deleteStaff(APIView):
+    permission_classes = [IsAdminUser]
+    def delete(self, request):
+        if request.method == 'DELETE':
+            if not request.user.is_superuser:
+                return Response({'message': ' You are not authorized to take this action', 'status': status.HTTP_401_UNAUTHORIZED})
+            email = request.data['email']
+            if not email:
+                return Response({'message': 'Missing Credentials', 'status': status.HTTP_400_BAD_REQUEST})
+            staff =  Customer.objects.filter(email = email).exists()
+            if staff:
+                staffMember = Customer.objects.get(pk = email)
+                staffMember.is_staff = False
+                staffMember.is_superuser = False
+                staffMember.save()
+            return Response({'message': 'Staff Member has been deleted', 'status': status.HTTP_410_GONE})
+
 
