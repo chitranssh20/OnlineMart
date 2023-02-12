@@ -23,7 +23,8 @@ class getBrands(APIView):
 
 
 class getAllProducts(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+    authentication_classes = []
     def get(self, request):
         if request.method == 'GET':
             products = Product.objects.all()

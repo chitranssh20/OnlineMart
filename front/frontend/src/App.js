@@ -14,17 +14,19 @@ import { ManageProducts } from './Components/ManageProducts/ManageProducts'
 import { ProductDash } from './Components/ProductDash/ProductDash'
 import { AddProduct } from './Components/AddProduct/AddProduct'
 import { UpdateProduct } from './Components/UpdateProduct/UpdateProduct'
+import { Product } from './Components/Product'
+
+
+
 function App() {
-
-
-
+  
 
  return (
   <>
   <BrowserRouter>
   <Routes>
     <Route path = '/*' element={<Error />} />
-    <Route path = '/'  element = { <> <Header /> <Sitemap /> </> } />
+    <Route path = '/'  element = { <> <Header /><Product /> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
     <Route path = '/signup'  element = { <SignUp /> } />
     <Route path = '/admin'  element = { <AdminLogIn /> } />
