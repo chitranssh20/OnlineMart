@@ -1,6 +1,6 @@
 import React from 'react'
 import {useNavigate} from 'react-router-dom'
-import { useEffect } from 'react'
+import {useState, useEffect } from 'react'
 import './Header.css'
 import '../Global.css'
 import search from '../icons/search.png'
@@ -8,10 +8,35 @@ import cart from '../icons/cart.png'
 import user from '../icons/user-white.png'
 
 export const Header = () => {
+  const [localCart, setlocalCart] = useState([])
+  
+  useEffect(() => {
+    window.addEventListener('storage', ()=>{
+      let storedCart = JSON.parse(localStorage.getItem('OnlineMartCart'))
+      setlocalCart(storedCart)
+    })
+    console.log('local cart set', localCart)
+  }, [])
+  
+
+
   let navigate = useNavigate();
   let sidebar = document.getElementsByClassName('sidebar')
   let cartSidebar = document.querySelector('#cartSidebar');
+
+  useEffect(() => {
+    let OnlineMartCart = localStorage.getItem('OnlineMartCart')
+    if(OnlineMartCart!= undefined || OnlineMartCart!= null){
+      //do nothing
+    }
+    else{
+      let justCart = []
+      localStorage.setItem('OnlineMartCart', JSON.stringify(justCart))
+    }
   
+  }, [])
+  
+
   document.onclick = (e) =>{
     if (cartSidebar != null || cartSidebar!= undefined){
       let sidebarStyle = window.getComputedStyle(cartSidebar, null);
@@ -53,13 +78,17 @@ export const Header = () => {
     removeCookieConsentBox();
     localStorage.setItem('Consent', true);
   }
+
+  //Consent Code
   let consent = localStorage.getItem('Consent')
+
   useEffect(() => {
     if(!consent){
       let consentBox = document.getElementsByClassName('consentBox')[0]
       consentBox.style.display = 'block'
     }
   }, [])
+  
     
   return (
     <>
@@ -85,7 +114,7 @@ export const Header = () => {
               </span>
               <span className='userImg'>
                 <img src= {cart} alt= 'cart' target = '_blank'  onClick={()=>{
-                  navigate('cart/');
+                  navigate('/cart');
                 }} />
               </span>
             </div>
@@ -95,6 +124,11 @@ export const Header = () => {
           <h2 className='sidebarClick' >Hello, </h2>
           <h3 className='sidebarClick'>Username</h3>
           <button className='sidebarClick'>Logout</button>
+          <div className='sideCartPreview  sidebarClick'>
+                <ul>
+                  
+                </ul>
+          </div>
           </div>    
       
             <div className='consentBox'>

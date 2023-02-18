@@ -9,7 +9,7 @@ export const Product = () => {
 
 const [products, setproducts] = useState([])
 const [currentPage, setcurrentPage] = useState(1)
-const [productPerPage, setproductPerPage] = useState(2)
+const [productPerPage, setproductPerPage] = useState(9)
 const [loading, setloading] = useState(true)
 
 

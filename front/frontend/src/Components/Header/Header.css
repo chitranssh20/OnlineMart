@@ -61,8 +61,8 @@ header {
 }
 .sidebar{
     transform: translateZ(0);
-    height: 99vh;
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     z-index: 5;
     top: 0px;
     right: 0px;
@@ -112,4 +112,11 @@ header {
     background-color: black;
     margin-top: 10px;
     cursor: pointer;
+}
+.sideCartPreview{
+    width: 90%;
+    background-color: var(--thirdColor);
+    height: 80%;
+    margin-top: 10%;
+    margin-left: 5%;
 }

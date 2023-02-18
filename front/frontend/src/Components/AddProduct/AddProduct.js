@@ -25,15 +25,17 @@ export const AddProduct = () => {
             productData.append('imgF', imgF)
             productData.append('imgS', imgS)
             productData.append('imgT', imgT) 
-            console.log('imkages', imgF, imgS, imgT, 'djdjdjjd')
-            console.log('done')
             if(imgF == undefined || imgF == null || imgS == undefined || imgS == null || imgT == undefined || imgT == null || imgF == '' || imgS == '' || imgT == ''){
                 window.alert('Please upload all the three images')
             }
             else{
 
                 axiosInstance.post('product/addProduct/', productData).then((res)=>{
-                  if (res.data.status === 400){
+                  if(res.status === 401){
+                    window.alert('You are not authorized to do this task')
+                    console.log(res)
+                  }
+                  else if (res.data.status === 400){
                     window.alert('Please fill all the details')
                   }
                   else if(res.data.status === 201){
@@ -49,7 +51,7 @@ export const AddProduct = () => {
                     setdiscounted_price('')
                     window.location.reload();
                   }
-                }).catch(err=>console.log(err))
+                }).catch(err=>console.log(err, window,alert('Some problem occured, make sure you are logged in as a staff.')))
             }
 
         }
