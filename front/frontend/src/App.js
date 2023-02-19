@@ -17,16 +17,18 @@ import { UpdateProduct } from './Components/UpdateProduct/UpdateProduct'
 import { Product } from './Components/Product'
 
 
-
 function App() {
   
+  
+
+
 
  return (
   <>
   <BrowserRouter>
   <Routes>
     <Route path = '/*' element={<Error />} />
-    <Route path = '/'  element = { <> <Header /><Product /> <Sitemap /> </> } />
+    <Route path = '/'  element = { <> <Header/><Product/> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
     <Route path = '/signup'  element = { <SignUp /> } />
     <Route path = '/admin'  element = { <AdminLogIn /> } />

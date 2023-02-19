@@ -2,9 +2,9 @@ import React from 'react'
 import { v4 as uuid } from 'uuid'
 import './Product.css'
 import './Global.css'
+import { Header } from './Header/Header'
 
-
-export const Item = ({ products }) => {
+export const Item = ({products }) => {
     const imgURl = 'http://127.0.0.1:8000/product';
 
     const buyNow = (e, product) =>{
@@ -30,6 +30,7 @@ export const Item = ({ products }) => {
             cart['total'] = product.discounted_price
             cart.push(prod)
             localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
+           
         }
         else{
 
@@ -78,6 +79,9 @@ export const Item = ({ products }) => {
             }
         });
         localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
+
+
+
 
     }
 

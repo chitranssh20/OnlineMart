@@ -6,18 +6,20 @@ import '../Global.css'
 import search from '../icons/search.png'
 import cart from '../icons/cart.png'
 import user from '../icons/user-white.png'
+import {v4 as uuid} from 'uuid'
 
-export const Header = () => {
+
+export const Header = ({}) => {
   const [localCart, setlocalCart] = useState([])
-  
+
+  //Load Already Present Cart
   useEffect(() => {
-    window.addEventListener('storage', ()=>{
-      let storedCart = JSON.parse(localStorage.getItem('OnlineMartCart'))
+    let storedCart = JSON.parse(localStorage.getItem('OnlineMartCart'))
       setlocalCart(storedCart)
-    })
-    console.log('local cart set', localCart)
+    
   }, [])
-  
+
+
 
 
   let navigate = useNavigate();
@@ -125,8 +127,12 @@ export const Header = () => {
           <h3 className='sidebarClick'>Username</h3>
           <button className='sidebarClick'>Logout</button>
           <div className='sideCartPreview  sidebarClick'>
-                <ul>
-                  
+                <ul className='sidebarClick sideCartPreviewUL' >
+                  {
+                    localCart.map((product)=>{
+                      return<li className='sidebarClick sidebarPreviewLi ' key={uuid()} >{product.name}</li>
+                    })
+                  }
                 </ul>
           </div>
           </div>    
