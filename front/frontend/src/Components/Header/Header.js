@@ -8,18 +8,9 @@ import cart from '../icons/cart.png'
 import user from '../icons/user-white.png'
 import {v4 as uuid} from 'uuid'
 
+export const Header = ({localCart}) => {
 
-export const Header = ({}) => {
-  const [localCart, setlocalCart] = useState([])
-
-  //Load Already Present Cart
-  useEffect(() => {
-    let storedCart = JSON.parse(localStorage.getItem('OnlineMartCart'))
-      setlocalCart(storedCart)
-    
-  }, [])
-
-
+ 
 
 
   let navigate = useNavigate();
@@ -28,7 +19,7 @@ export const Header = ({}) => {
 
   useEffect(() => {
     let OnlineMartCart = localStorage.getItem('OnlineMartCart')
-    if(OnlineMartCart!= undefined || OnlineMartCart!= null){
+    if(OnlineMartCart!== undefined || OnlineMartCart!== null){
       //do nothing
     }
     else{
@@ -40,7 +31,7 @@ export const Header = ({}) => {
   
 
   document.onclick = (e) =>{
-    if (cartSidebar != null || cartSidebar!= undefined){
+    if (cartSidebar !== null || cartSidebar!== undefined){
       let sidebarStyle = window.getComputedStyle(cartSidebar, null);
       if(e.target.className != 'sidebarClick'){
         if(sidebarStyle.width != '0px'){
@@ -89,7 +80,7 @@ export const Header = ({}) => {
       let consentBox = document.getElementsByClassName('consentBox')[0]
       consentBox.style.display = 'block'
     }
-  }, [])
+  },[])
   
     
   return (
@@ -130,7 +121,7 @@ export const Header = ({}) => {
                 <ul className='sidebarClick sideCartPreviewUL' >
                   {
                     localCart.map((product)=>{
-                      return<li className='sidebarClick sidebarPreviewLi ' key={uuid()} >{product.name}</li>
+                      return<li className='sidebarClick sidebarPreviewLi' key={uuid()} >{product.name}</li>
                     })
                   }
                 </ul>

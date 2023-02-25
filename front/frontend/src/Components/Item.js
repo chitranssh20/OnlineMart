@@ -2,18 +2,30 @@ import React from 'react'
 import { v4 as uuid } from 'uuid'
 import './Product.css'
 import './Global.css'
-import { Header } from './Header/Header'
+import { useEffect } from 'react'
 
-export const Item = ({products }) => {
+export const Item = ({products, changeLocalCart }) => {
+
+    useEffect(() => {
+      
+    
+      changeLocalCart();
+    }, [])
+    
+
     const imgURl = 'http://127.0.0.1:8000/product';
+
+    // let sideCartUl = document.getElementsByClassName('sideCartPreviewUL')
 
     const buyNow = (e, product) =>{
         let buyNowButton = document.getElementById('item'+product.uniqId)
         let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
         let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
         cartQuantity.innerHTML  = 1
+        console.log('chala kya')
         cartQuantityButton.style.display = 'flex'
         buyNowButton.style.display = 'none'
+        console.log('chala to nahi ya chal gaya pata nahi')
         let cart = localStorage.getItem('OnlineMartCart')
 
 
@@ -30,7 +42,7 @@ export const Item = ({products }) => {
             cart['total'] = product.discounted_price
             cart.push(prod)
             localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
-           
+            
         }
         else{
 
@@ -48,6 +60,7 @@ export const Item = ({products }) => {
                 element.quantity += 1
                 element.subtotal += product.discounted_price 
             }
+
         });
             }
             else{
@@ -64,6 +77,11 @@ export const Item = ({products }) => {
         }
         localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
         }
+        // console.log(sideCartUl)
+        // let sideCartProductLi = <li className='sidebarClick sidebarPreviewLi' >{product.product_name}</li>
+        // sideCartUl[0].appendChild(sideCartProductLi)
+        // // console.log(sideCartUl)
+        changeLocalCart();
     }
 
     const addItemToCart = (e, product) =>{
@@ -81,7 +99,7 @@ export const Item = ({products }) => {
         localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
 
 
-
+        changeLocalCart();
 
     }
 
@@ -111,7 +129,7 @@ export const Item = ({products }) => {
             }
         });
         localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
-
+        changeLocalCart();
     }
 
     return (

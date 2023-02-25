@@ -4,7 +4,7 @@ import axiosInstance from './Axios'
 import { Item } from './Item'
 import { Paginate } from './Paginate'
 import './Product.css'
-export const Product = () => {
+export const Product = ({changeLocalCart}) => {
 
 
 const [products, setproducts] = useState([])
@@ -38,7 +38,7 @@ useEffect(() => {
         <>
         <div className='ListedProducts'>
 
-            <Item products = {currentPosts} />
+            <Item products = {currentPosts} changeLocalCart = {changeLocalCart} />
         </div>
         <Paginate productPerPage={productPerPage} totalProducts= {products.length} paginate = {paginate} />
         </>

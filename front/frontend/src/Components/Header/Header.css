@@ -7,6 +7,8 @@ header {
     justify-content: space-between;
     padding-top: 10px;
     font-size: 18px;
+    position: fixed;
+    top: 0px;
 }
 
 .logo {
