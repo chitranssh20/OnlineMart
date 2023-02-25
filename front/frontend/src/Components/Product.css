@@ -31,7 +31,7 @@
     /* padding-bottom: 2px; */
     /* background-color: green; */
     border: 5px solid black;
-    /* display: none; */
+    display: block;
 }
 .paginateNav{
     display: flex;

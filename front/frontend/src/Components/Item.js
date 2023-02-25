@@ -7,25 +7,52 @@ import { useEffect } from 'react'
 export const Item = ({products, changeLocalCart }) => {
 
     useEffect(() => {
-      
-    
       changeLocalCart();
+      
     }, [])
     
 
+    useEffect(() => {
+        let cart = JSON.parse(localStorage.getItem('OnlineMartCart'));
+        cart.forEach((product)=>{
+            let buyNowButton = document.getElementById('item'+product.id);
+            let cartQuantityButton = document.getElementById('cartQuantifer' + product.id);
+            if(buyNowButton!=null || buyNowButton!= undefined){
+
+                buyNowButton.style.display = 'none'
+            }
+            if(cartQuantityButton!=null || cartQuantityButton!= undefined){
+
+                cartQuantityButton.style.display = 'flex'
+            }
+            // buyNowButton.style.display = 'none'
+            // cartQuantityButton.style.display = 'flex'
+        })
+    
+    }, [])
+    
     const imgURl = 'http://127.0.0.1:8000/product';
 
     // let sideCartUl = document.getElementsByClassName('sideCartPreviewUL')
 
     const buyNow = (e, product) =>{
+        console.log(product)
+        console.log('item'+product.uniqId)
         let buyNowButton = document.getElementById('item'+product.uniqId)
-        let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
         let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
+        let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
+        console.log(cartQuantityButton)
+        if(buyNowButton!=null || buyNowButton!= undefined){
+
+            buyNowButton.style.display = 'none';
+        }
+        if(cartQuantityButton!=null || cartQuantityButton!= undefined){
+
+            cartQuantityButton.style.display = 'flex';
+        }
+
         cartQuantity.innerHTML  = 1
-        console.log('chala kya')
-        cartQuantityButton.style.display = 'flex'
-        buyNowButton.style.display = 'none'
-        console.log('chala to nahi ya chal gaya pata nahi')
+       
         let cart = localStorage.getItem('OnlineMartCart')
 
 
@@ -77,16 +104,15 @@ export const Item = ({products, changeLocalCart }) => {
         }
         localStorage.setItem('OnlineMartCart', JSON.stringify(cart) )
         }
-        // console.log(sideCartUl)
-        // let sideCartProductLi = <li className='sidebarClick sidebarPreviewLi' >{product.product_name}</li>
-        // sideCartUl[0].appendChild(sideCartProductLi)
-        // // console.log(sideCartUl)
+     
         changeLocalCart();
     }
 
     const addItemToCart = (e, product) =>{
         let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
         let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
+        console.log(cartQuantityButton)
+        console.log(cartQuantity)
         cartQuantity.innerHTML  = Number.parseInt(cartQuantity.innerHTML)+ 1
         let cart = JSON.parse(localStorage.getItem('OnlineMartCart'))
 
@@ -117,7 +143,7 @@ export const Item = ({products, changeLocalCart }) => {
                 element.subtotal -= product.discounted_price 
                 if(element.quantity===0){
                     console.log('quantity', element.quantity)
-                    cart = cart.filter(element => element.id != product.uniqId)
+                    cart = cart.filter(element => element.id !== product.uniqId)
                     let buyNowButton = document.getElementById('item'+product.uniqId)
         let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
         let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
