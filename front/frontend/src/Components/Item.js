@@ -39,9 +39,10 @@ export const Item = ({products, changeLocalCart }) => {
         console.log(product)
         console.log('item'+product.uniqId)
         let buyNowButton = document.getElementById('item'+product.uniqId)
-        let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
+        // let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
         let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
         console.log(cartQuantityButton)
+        console.log(buyNowButton)
         if(buyNowButton!=null || buyNowButton!= undefined){
 
             buyNowButton.style.display = 'none';
@@ -51,7 +52,7 @@ export const Item = ({products, changeLocalCart }) => {
             cartQuantityButton.style.display = 'flex';
         }
 
-        cartQuantity.innerHTML  = 1
+        // cartQuantity.innerHTML  = 1
        
         let cart = localStorage.getItem('OnlineMartCart')
 
@@ -169,7 +170,6 @@ export const Item = ({products, changeLocalCart }) => {
                         <div className='itemCardImg' style={{
                             backgroundImage: `url(${imgURl + product.firstImage
                                 })`,
-                            //   height: "10%",
                             backgroundRepeat: "no-repeat",
                             backgroundSize: "cover"
                         }} >

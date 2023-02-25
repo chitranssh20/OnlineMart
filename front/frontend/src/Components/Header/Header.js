@@ -82,6 +82,7 @@ export const Header = ({localCart}) => {
     }
   },[])
   
+  const imgURl = 'http://127.0.0.1:8000/product';
     
   return (
     <>
@@ -121,7 +122,24 @@ export const Header = ({localCart}) => {
                 <ul className='sidebarClick sideCartPreviewUL' >
                   {
                     localCart.map((product)=>{
-                      return<li className='sidebarClick sidebarPreviewLi' key={uuid()} >{product.name}</li>
+                      
+                      return<>
+                      <li className='sidebarClick sidebarPreviewLi' key={uuid()} >{product.name}</li>
+                      <li className='sidebarClick sidebarPreviewLi'>
+                      <div className='sideCartLiImage' style={{
+                        backgroundImage: `url(${imgURl + product.firstImage
+                        })`,
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover"
+                        
+                      }} ></div>
+                        <span className='sidebarClick sideCartItemSubtotal' >
+                        {product.subtotal}
+                        </span>
+                        <span className='sidebarClick
+                         sideCartItemQuantity' >Qty: {product.quantity}</span>
+                      </li>
+                      </>
                     })
                   }
                 </ul>
