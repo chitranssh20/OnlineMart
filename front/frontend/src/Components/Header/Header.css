@@ -118,7 +118,44 @@ header {
 .sideCartPreview{
     width: 90%;
     background-color: var(--thirdColor);
+    background-color: transparent;
     height: 80%;
     margin-top: 10%;
     margin-left: 5%;
+}
+.sideCartPreviewUL{
+    max-height: 100%;
+    overflow: auto;
+    
+}
+.sideCartPreviewUL>li{
+    list-style: none;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+.sidebarPreviewName{
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: 
+    2px solid black underline;
+    cursor: pointer;
+}
+.sideCartLiImage{
+    width: 250px;
+    height: 200px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+.sideCartItemSubtotal{
+    margin-right: 10px;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+.sideCartItemQuantity{
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }

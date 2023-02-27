@@ -12,24 +12,24 @@ export const Item = ({products, changeLocalCart }) => {
     }, [])
     
 
-    useEffect(() => {
-        let cart = JSON.parse(localStorage.getItem('OnlineMartCart'));
-        cart.forEach((product)=>{
-            let buyNowButton = document.getElementById('item'+product.id);
-            let cartQuantityButton = document.getElementById('cartQuantifer' + product.id);
-            if(buyNowButton!=null || buyNowButton!= undefined){
+    // useEffect(() => {
+    //     let cart = JSON.parse(localStorage.getItem('OnlineMartCart'));
+    //     cart.forEach((product)=>{
+    //         let buyNowButton = document.getElementById('item'+product.id);
+    //         let cartQuantityButton = document.getElementById('cartQuantifer' + product.id);
+    //         if(buyNowButton!=null || buyNowButton!= undefined){
 
-                buyNowButton.style.display = 'none'
-            }
-            if(cartQuantityButton!=null || cartQuantityButton!= undefined){
+    //             buyNowButton.style.display = 'none'
+    //         }
+    //         if(cartQuantityButton!=null || cartQuantityButton!= undefined){
 
-                cartQuantityButton.style.display = 'flex'
-            }
-            // buyNowButton.style.display = 'none'
-            // cartQuantityButton.style.display = 'flex'
-        })
+    //             cartQuantityButton.style.display = 'flex'
+    //         }
+    //         // buyNowButton.style.display = 'none'
+    //         // cartQuantityButton.style.display = 'flex'
+    //     })
     
-    }, [])
+    // }, [])
     
     const imgURl = 'http://127.0.0.1:8000/product';
 
@@ -39,20 +39,22 @@ export const Item = ({products, changeLocalCart }) => {
         console.log(product)
         console.log('item'+product.uniqId)
         let buyNowButton = document.getElementById('item'+product.uniqId)
-        // let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
         let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
+        let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
         console.log(cartQuantityButton)
         console.log(buyNowButton)
         if(buyNowButton!=null || buyNowButton!= undefined){
-
-            buyNowButton.style.display = 'none';
+            console.log('5555');
+            buyNowButton.style.display = "none";
+            console.log('7777');
         }
         if(cartQuantityButton!=null || cartQuantityButton!= undefined){
-
-            cartQuantityButton.style.display = 'flex';
+            console.log('4444');
+            cartQuantityButton.style.display = "flex";
+            console.log('8888');
         }
 
-        // cartQuantity.innerHTML  = 1
+        cartQuantity.innerHTML  = 1
        
         let cart = localStorage.getItem('OnlineMartCart')
 
@@ -176,7 +178,7 @@ export const Item = ({products, changeLocalCart }) => {
                            
                         </div>
                         <div className='itemDetails'>
-                            <h3 className='itemName'>{product.product_name} </h3>
+                            <h3 className='itemName' onClick={()=>window.open(`/productDetail/${product.uniqId}`,'_blank')} >{product.product_name} </h3>
                             <h4 className='itemDesc'>Rating: {product.rating}</h4>
                             <h4 className='itemDesc'><span className='discountPrice'>₹{product.discounted_price}</span> <span className='retailPrice'>₹ {product.retail_price}</span></h4>
                             <h4 className='itemDesc'><span className='Discount'>{discount}% Off</span> </h4>

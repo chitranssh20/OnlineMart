@@ -15,6 +15,7 @@ import { ProductDash } from './Components/ProductDash/ProductDash'
 import { AddProduct } from './Components/AddProduct/AddProduct'
 import { UpdateProduct } from './Components/UpdateProduct/UpdateProduct'
 import { Product } from './Components/Product'
+import { ProductDetail } from './Components/ProductDetail/ProductDetail'
 import { useState, useEffect } from 'react'
 
 function App() {
@@ -41,6 +42,7 @@ useEffect(() => {
     <Route path = '/*' element={<Error />} />
     <Route path = '/'  element = { <> <Header localCart={localCart} /><Product changeLocalCart={handleSideCart} /> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
+    <Route path='/productDetail/:id' element={<> <Header localCart={localCart} /><ProductDetail /> </>} />
     <Route path = '/signup'  element = { <SignUp /> } />
     <Route path = '/admin'  element = { <AdminLogIn /> } />
     <Route path = '/admindash'  element = { <AdminDashboard /> } />

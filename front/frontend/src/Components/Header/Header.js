@@ -124,20 +124,20 @@ export const Header = ({localCart}) => {
                     localCart.map((product)=>{
                       
                       return<>
-                      <li className='sidebarClick sidebarPreviewLi' key={uuid()} >{product.name}</li>
+                      <li className='sidebarClick sidebarPreviewLi sidebarPreviewName' key={uuid()} >{product.name}</li>
                       <li className='sidebarClick sidebarPreviewLi'>
                       <div className='sideCartLiImage' style={{
-                        backgroundImage: `url(${imgURl + product.firstImage
+                        backgroundImage: `url(${imgURl + product.image
                         })`,
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover"
                         
                       }} ></div>
                         <span className='sidebarClick sideCartItemSubtotal' >
-                        {product.subtotal}
+                        Subtotal: ₹ {product.subtotal}
                         </span>
                         <span className='sidebarClick
-                         sideCartItemQuantity' >Qty: {product.quantity}</span>
+                         sideCartItemQuantity' >Quantity: {product.quantity}</span>
                       </li>
                       </>
                     })

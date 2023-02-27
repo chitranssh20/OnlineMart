@@ -1,0 +1,84 @@
+.flexing{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+.productData{
+    width: 100%;
+    height: 80vh;
+}
+.productIntro{
+    width: 100%;
+    height: 80%;
+    justify-content: space-between;
+}
+.productDetailImages{
+    width: 60%;
+    justify-content: space-between;
+    padding-top: 3%;
+    padding-left: 10px;
+}
+.productDetailImagesPrimary{
+    width: 60%;
+}
+.productDetailImagesSecondary{
+    width: 25%;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+.productDetailSideImage{
+    width: 100%;
+    height: 30%;
+    /* margin-bottom: 15px; */
+
+}
+.productDetailText{
+    flex-direction: column;
+    width: 30%;
+    justify-content: center;
+    background-color: ghostwhite;
+    border: 1px solid black;
+    padding-left: 15px;
+}
+.productDataName{
+    font-size: 25px;
+    text-transform: capitalize;
+    text-decoration: 1px solid black underline;
+    font-weight: bold;
+    letter-spacing: 1px;
+    justify-content: start;
+    align-items: flex-end;
+    /* height: 40%; */
+
+}
+.productDataPrice{
+    justify-content: start;
+    /* height: 50%; */
+}
+.productDataPriceDiscounted{
+    color: red;
+    margin-right: 25px;
+    display: inline-block;
+}
+.productDataPriceRetail{
+    text-decoration: line-through;
+    display: inline-block;
+}
+.productDataBrand{
+    font-size: 15px;
+    font-weight: 500;
+    font-variant: small-caps;
+    font-style: italic;
+}
+.ProductDataDiscountSpan{
+    /* display: block; */
+    /* width: 100%; */
+    margin-top: 
+    150px;
+    background-color: red;
+    color: white;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* display: inline-block; */
+}
