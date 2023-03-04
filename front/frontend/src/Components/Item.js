@@ -36,11 +36,10 @@ export const Item = ({products, changeLocalCart }) => {
     // let sideCartUl = document.getElementsByClassName('sideCartPreviewUL')
 
     const buyNow = (e, product) =>{
-        console.log(product)
         console.log('item'+product.uniqId)
-        let buyNowButton = document.getElementById('item'+product.uniqId)
-        let cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
-        let cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
+        var buyNowButton = document.getElementById('item'+product.uniqId)
+        var cartQuantityButton = document.getElementById('cartQuantifer' + product.uniqId)
+        var cartQuantity = cartQuantityButton.querySelector('.itemQuantity') 
         console.log(cartQuantityButton)
         console.log(buyNowButton)
         if(buyNowButton!=null || buyNowButton!= undefined){
@@ -183,7 +182,7 @@ export const Item = ({products, changeLocalCart }) => {
                             <h4 className='itemDesc'><span className='discountPrice'>₹{product.discounted_price}</span> <span className='retailPrice'>₹ {product.retail_price}</span></h4>
                             <h4 className='itemDesc'><span className='Discount'>{discount}% Off</span> </h4>
                         </div>
-                        <button className='ProductButton' id = {'item'+product.uniqId}  onClick={(e)=>{buyNow(e, product)}} >Buy NOW</button>
+                        <button className='ProductButton' id = {'item'+product.uniqId}  onClick={(e)=>{buyNow(e, product)}}   >Buy NOW</button>
                         <div className='cartQuantifier' id={'cartQuantifer' + product.uniqId
                     } >
                             <div className='cartQuantifierButton' id={`subtract${product.uniqId

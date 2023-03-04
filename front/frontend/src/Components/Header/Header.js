@@ -124,7 +124,7 @@ export const Header = ({localCart}) => {
                     localCart.map((product)=>{
                       
                       return<>
-                      <li className='sidebarClick sidebarPreviewLi sidebarPreviewName' key={uuid()} >{product.name}</li>
+                      <li className='sidebarClick sidebarPreviewLi sidebarPreviewName'>{product.name}</li>
                       <li className='sidebarClick sidebarPreviewLi'>
                       <div className='sideCartLiImage' style={{
                         backgroundImage: `url(${imgURl + product.image

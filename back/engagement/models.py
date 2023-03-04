@@ -11,5 +11,7 @@ class Review(models.Model):
     uniqId = models.ForeignKey('product.Product', on_delete=models.CASCADE)
     email = models.ForeignKey('customers.Customer', on_delete=models.CASCADE)
     date = models.DateField(auto_now_add=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     comment = models.CharField(max_length=300)
+
 
