@@ -10,6 +10,8 @@ export const ProductDetail = () => {
     const [productData, setproductData] = useState([])
     const [PrimeImage, setPrimeImage] = useState('')
 
+    const [newComment, setnewComment] = useState('')
+
     useEffect(() => {
         if(id){
 
@@ -60,6 +62,26 @@ let discount = ((productData.retail_price - productData.discounted_price) / prod
             // window.alert('alkdjhalkdj')
         }
     }
+
+
+
+
+const addComment = ()=>{
+    let commentCredentials = new FormData();
+    commentCredentials.append('comment', newComment);
+    commentCredentials.append('uniqId', id)
+    console.log('newcomment', newComment)
+    if(newComment != ''){
+        axiosInstance.post('engagement/saveComment/', commentCredentials).then((res)=>{
+            console.log(res.data)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+}
+
+
+
   return (
     <>
     <div className='productData flexing'>
@@ -107,11 +129,19 @@ let discount = ((productData.retail_price - productData.discounted_price) / prod
                             </h3>
                 </div>
         </div>
+    </div>
         <div className='productDetailDescription flexing'>
                         {productData.description}
         </div>
+        <div className='commentBox'>
+        <div className='textarea'>
+            <textarea placeholder="Write your Review here" onChange={(e)=>{
+                setnewComment(e.target.value);
+            }}  ></textarea>
+            <button onClick={(e)=> addComment()} >Submit</button>
+        </div>
         <Comment productId={id} />
-    </div>
+        </div>
     </>
   )
 }

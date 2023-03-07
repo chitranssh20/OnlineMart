@@ -7,6 +7,7 @@ from .serializer import getCodeSerializer, getCommentSerializer
 from product.models import  Product
 from product.serializer import productSerializer
 from customers.models import Customer
+from rest_framework.permissions import IsAuthenticated
 from customers.views import isCustomer
 # Create your views here.
 
@@ -57,31 +58,29 @@ class deleteCode(APIView):
 
 # Review APIs
 class saveComment(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
-
+        print(request.user)
         uniqId = request.POST.get('uniqId')
-        email = request.POST.get('email')
+        email = request.user
         comment = request.POST.get('comment')
         parent = request.POST.get('parent')
         if not uniqId or not email or not comment:
             return Response('Missing Credentials')
 
         uniqId = request.data['uniqId']
-        email = request.data['email']
+        email = request.user
         comment = request.data['comment']
 
         if not uniqId or not email or not comment:
             return Response('no data')
         id = int(uniqId)
         product = Product.objects.get(pk = id)
-        print(Customer.objects.filter(email = email).exists())
-        print('alkdjal', isCustomer(email))
         if not Customer.objects.filter(email = email).exists():
             return Response('Customer does not exists')
         customer = Customer.objects.get(email = email)
         response = productSerializer(product)
         if not parent:
-            print('9999')
             comment = Review(uniqId = product, email = customer, comment = comment)
             comment.save()
             return Response({'response': 'Comment has been added'})
@@ -115,7 +114,7 @@ class getComment(APIView):
 
         commentsById = Review.objects.filter(uniqId = id, parent = None)
         comments  = getCommentSerializer(commentsById, many=True)
-        return Response({'resposne': comments.data, 'status': status.HTTP_200_OK})
+        return Response({'response': comments.data, 'status': status.HTTP_200_OK})
 
 class getReply(APIView):
     def get(self, request, id):

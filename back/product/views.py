@@ -63,6 +63,7 @@ class getAllProducts(APIView):
 
 
 class getSingleProduct(APIView):
+    authentication_classes = []
     def get(self, request, id):
         if request.method == 'GET':
             product = Product.objects.get(pk = id) 
