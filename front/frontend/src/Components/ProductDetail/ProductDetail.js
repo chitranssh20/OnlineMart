@@ -3,9 +3,12 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axiosInstance from '../Axios'
 import { Comment } from '../Comment/Comment'
+import { useSelector, useDispatch } from 'react-redux'
 
 import './ProductDetail.css'
 export const ProductDetail = () => {
+
+    const dispatch = useDispatch();
     const {id} = useParams()
     const [productData, setproductData] = useState([])
     const [PrimeImage, setPrimeImage] = useState('')
@@ -64,16 +67,31 @@ let discount = ((productData.retail_price - productData.discounted_price) / prod
     }
 
 
+const commentSavedSucceffully = () =>{
+    dispatch({
+        type: "open",
+        message: "Your comment has been saved successfully"
+    })
+    console.log('tried to change modal')
+}
 
+const removeModal = () =>{
+    dispatch({
+        type: "close"
+    })
+}
 
 const addComment = ()=>{
+    setnewComment('')
     let commentCredentials = new FormData();
     commentCredentials.append('comment', newComment);
     commentCredentials.append('uniqId', id)
-    console.log('newcomment', newComment)
     if(newComment != ''){
         axiosInstance.post('engagement/saveComment/', commentCredentials).then((res)=>{
-            console.log(res.data)
+            commentSavedSucceffully();
+            setTimeout(() => {
+                removeModal()
+            }, 5000);
         }).catch((err)=>{
             console.log(err)
         })
@@ -135,7 +153,7 @@ const addComment = ()=>{
         </div>
         <div className='commentBox'>
         <div className='textarea'>
-            <textarea placeholder="Write your Review here" onChange={(e)=>{
+            <textarea placeholder="Write your Review here" value={newComment} onChange={(e)=>{
                 setnewComment(e.target.value);
             }}  ></textarea>
             <button onClick={(e)=> addComment()} >Submit</button>
