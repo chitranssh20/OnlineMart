@@ -10,6 +10,14 @@ form{
     width: 60%;
     padding: 5px;
 }
+.abstractImg{
+    width: 50%;
+    position: fixed;
+    left: 50%;
+    top: 0%;
+    transform: translate(0%, 0%);
+}
+
 .homeButton{
     position: absolute;
     top: 5%;
@@ -31,4 +39,9 @@ form{
     cursor: pointer;
     font-size: 18px;
     text-decoration: 2px underline;
+}
+@media screen and (max-width: 600px) {
+    .abstractImg{
+        display: none;
+    }
 }

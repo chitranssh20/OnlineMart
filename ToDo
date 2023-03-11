@@ -1,7 +1,4 @@
-Add admin header that describes admin name, rank (staff, superuser ) also checks if admin value is true or false in storage and rediret to admin login if admin cookie is not set 
 Forgot Password API and Testing
-Including image in login and sign up form if on pc because 100% width is just too much
-Add Models in login, signup by making a alert component.
-Redirect non staff from admin panel by sending an isStaff api to backend when admindash loads to act according to the response. 
 Add tiny MCE Editor in add product, update product, comments
-Solve Image Sizing Problem, It is display:none right now in Product.css
+Update sign up page
+Redesign productDetail Page

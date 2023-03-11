@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../Axios'
+import abstactWelcome from '../images/abstactWelcome.jpg'
 import './Login.css'
 import '../Global.css'
 
@@ -33,7 +34,9 @@ export const Login = () => {
   return (
     <>
       <h3 className='homeButton' onClick={() => { navigate('/') }} >HOME</h3>
-      <form>
+      <img  src= {abstactWelcome} className='abstractImg' />
+      
+      <form id='loginForm' >
         <label htmlFor='email' >Email:</label>
         <input type='email' value={loginEmail} name='email' id='email' onChange={(e) => {
           setloginEmail(e.target.value)

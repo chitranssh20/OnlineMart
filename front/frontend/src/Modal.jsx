@@ -17,7 +17,7 @@ const Modal = () => {
     <div className="modal">
         {Note}
     </div>
-        </>:<>adaslkdjasd</>
+        </>:<></>
 
     }
     </>

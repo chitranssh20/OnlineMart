@@ -17,6 +17,7 @@ import { UpdateProduct } from './Components/UpdateProduct/UpdateProduct'
 import { Product } from './Components/Product'
 import { ProductDetail } from './Components/ProductDetail/ProductDetail'
 import { useState, useEffect } from 'react'
+import OTP from './Components/OTP'
 
 function App() {
   
@@ -40,6 +41,7 @@ useEffect(() => {
   <BrowserRouter>
   <Routes>
     <Route path = '/*' element={<Error />} />
+    <Route path = '/verifyOtp' element={<OTP />} />
     <Route path = '/'  element = { <> <Header localCart={localCart} /><Product changeLocalCart={handleSideCart} /> <Sitemap /> </> } />
     <Route path = '/login'  element = { <Login /> } />
     <Route path='/productDetail/:id' element={<> <Header localCart={localCart} /><ProductDetail /> </>} />

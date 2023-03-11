@@ -50,6 +50,7 @@ def isAlreadyInVisitor(email):
         Visitor.objects.filter(email = email).delete()
         
 class emailVerification(APIView):
+    authentication_classes = []
     def post(self,request):
         checkEmail = request.POST.get('email')
         checkPassword = request.POST.get('password')
@@ -209,5 +210,6 @@ class deleteStaff(APIView):
                 staffMember.is_superuser = False
                 staffMember.save()
             return Response({'message': 'Staff Member has been deleted', 'status': status.HTTP_410_GONE})
+
 
 
