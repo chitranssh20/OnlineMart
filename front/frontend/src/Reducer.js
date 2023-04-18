@@ -1,12 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit'
-
+import { withReduxStateSync } from 'redux-state-sync';
 
 const iniitalState = {
     isOpen: false,
     message: 'This is default modal'
 }
 
-export const customReducer = createReducer(iniitalState ,{
+const customReducer = createReducer(iniitalState ,{
     open: (state, action) => {
         state.isOpen = true;
         state.message= action.message;
@@ -19,4 +19,6 @@ export const customReducer = createReducer(iniitalState ,{
     }
 
 } )
+
+export default withReduxStateSync(customReducer)
 
